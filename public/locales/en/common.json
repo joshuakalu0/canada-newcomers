@@ -1,0 +1,17 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Login",
+    "register": "Register",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Your Ultimate Student Guide to Canada",
+    "subtitle": "Everything international students need to thrive in Canada - from campus resources to student discounts, housing options, and more!",
+    "explore": "Explore Resources",
+    "join": "Join Now"
+  }
+}

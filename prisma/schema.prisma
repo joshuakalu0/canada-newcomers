@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String
+  email          String    @unique
+  password       String
+  country        String?
+  language       String?
+  role           Role      @default(USER)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  feedback       Feedback[]
+  savedLocations SavedLocation[]
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  type        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  locations   Location[]
+}
+
+model Location {
+  id          String    @id @default(cuid())
+  name        String
+  lat         Float
+  lng         Float
+  address     String?
+  city        String
+  province    String
+  postalCode  String?
+  url         String?
+  phone       String?
+  serviceId   String
+  service     Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  savedBy     SavedLocation[]
+}
+
+model SavedLocation {
+  id         String   @id @default(cuid())
+  userId     String
+  locationId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, locationId])
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  subject   String
+  message   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  status    FeedbackStatus @default(PENDING)
+}
+
+model support {
+  id        String   @id @default(cuid())
+  name    String
+  email    String
+  topic   String
+  message   String
+  createdAt      DateTime  @default(now())
+
+}
+
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum FeedbackStatus {
+  PENDING
+  REVIEWED
+  RESOLVED
+}

@@ -1,0 +1,17 @@
+{
+  "header": {
+    "home": "Accueil",
+    "about": "À propos",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "language": "Langue"
+  },
+  "hero": {
+    "title": "Votre guide étudiant ultime pour le Canada",
+    "subtitle": "Tout ce dont les étudiants internationaux ont besoin pour s'épanouir au Canada - des ressources du campus aux réductions pour étudiants, options de logement, et plus encore!",
+    "explore": "Explorer les ressources",
+    "join": "Rejoindre maintenant"
+  }
+}

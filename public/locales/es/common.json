@@ -1,0 +1,17 @@
+{
+  "header": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "faq": "Preguntas frecuentes",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "language": "Idioma"
+  },
+  "hero": {
+    "title": "Tu guía definitiva para estudiantes en Canadá",
+    "subtitle": "Todo lo que los estudiantes internacionales necesitan para prosperar en Canadá - desde recursos del campus hasta descuentos para estudiantes, opciones de alojamiento, ¡y más!",
+    "explore": "Explorar recursos",
+    "join": "Únete ahora"
+  }
+}
