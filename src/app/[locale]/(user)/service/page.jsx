@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const ServicesPage = () => {
@@ -8,6 +10,7 @@ const ServicesPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredServices, setFilteredServices] = useState([]);
   const [activeMarker, setActiveMarker] = useState(null);
+  const t = useTranslations("services");
 
   // Comprehensive list of services and locations with real coordinates and descriptions
   const services = {
@@ -414,22 +417,32 @@ const ServicesPage = () => {
     setFilteredServices(results);
   };
 
+  //  const categories = [
+  //    { key: "all", label: t("category_all"), icon: "🔍" },
+  //    { key: "government", label: t("category_government"), icon: "🏛️" },
+  //    { key: "banks", label: t("category_banks"), icon: "🏦" },
+  //    { key: "shopping", label: t("category_shopping"), icon: "🛍️" },
+  //    { key: "groceries", label: t("category_groceries"), icon: "🛒" },
+  //    { key: "transport", label: t("category_transport"), icon: "🚌" },
+  //    { key: "telecom", label: t("category_telecom"), icon: "📱" },
+  //    { key: "healthcare", label: t("category_healthcare"), icon: "🏥" },
+  //    { key: "education", label: t("category_education"), icon: "🎓" },
+  //  ];
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-gradient-to-r from-red-600 to-white text-white text-center py-12">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          Newcomers Canada Hub
+          {t("header_title")}
         </h1>
-        <p className="text-xl md:text-2xl mb-6">
-          Your vibrant guide to settling in Canada
-        </p>
+        <p className="text-xl md:text-2xl mb-6">{t("header_description")}</p>
       </header>
 
       {/* Services Section */}
       <section id="services" className="max-w-7xl mx-auto py-12 px-4">
         <h2 className="text-4xl font-bold text-red-600 text-center mb-12">
-          All Services
+          {t("all_services_title")}
         </h2>
 
         {/* Search Bar */}
@@ -437,7 +450,7 @@ const ServicesPage = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search services by name, location, or type..."
+              placeholder={t("search_placeholder")}
               value={searchQuery}
               onChange={handleSearch}
               className="w-full px-4 py-3 pl-10 border-2 border-red-600 rounded-full focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 text-gray-800"
@@ -458,7 +471,10 @@ const ServicesPage = () => {
           </div>
           {searchQuery && (
             <p className="text-sm text-gray-500 mt-2 text-center">
-              Showing {filteredServices.length} results for "{searchQuery}"
+              {t("search_results", {
+                count: filteredServices.length,
+                query: searchQuery,
+              })}
             </p>
           )}
         </div>
@@ -512,8 +528,7 @@ const ServicesPage = () => {
                       {categories.find((c) => c.key === categoryKey)?.icon ||
                         "📌"}
                     </span>
-                    {categories.find((c) => c.key === categoryKey)?.label ||
-                      categoryKey}
+                    {t(`category_${categoryKey}`) || categoryKey}
                   </h3>
 
                   <div className="space-y-4">
@@ -550,11 +565,9 @@ const ServicesPage = () => {
       {/* Map Section */}
       <section id="map" className="max-w-7xl mx-auto py-12 px-4">
         <h2 className="text-4xl font-bold text-red-600 text-center mb-8">
-          Find Services Near You
+          {t("map_title")}
         </h2>
-        <p className="text-lg text-center mb-6">
-          Select a service to view its location on the map.
-        </p>
+        <p className="text-lg text-center mb-6">{t("map_description")}</p>
         <div
           id="map-container"
           ref={mapRef}
@@ -577,48 +590,48 @@ const ServicesPage = () => {
                 ></path>
               </svg>
               <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Loading Map
+                {t("map_loading_title")}
               </h3>
-              <p className="text-gray-600">
-                Please wait while we load the interactive map...
-              </p>
+              <p className="text-gray-600">{t("map_loading_description")}</p>
             </div>
           </div>
         </div>
         <div className="mt-6 bg-gray-50 rounded-lg p-4">
-          <h3 className="font-semibold text-gray-800 mb-2">Map Legend</h3>
+          <h3 className="font-semibold text-gray-800 mb-2">
+            {t("map_legend_title")}
+          </h3>
           <div className="flex flex-wrap text-gray-900 gap-4 text-sm">
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>{" "}
-              Government Agencies
+              <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
+              {t("legend_government")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-green-600 rounded-full mr-2"></div>{" "}
-              Banks & Money Transfer
+              <div className="w-3 h-3 bg-green-600 rounded-full mr-2"></div>
+              {t("legend_banks")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-purple-600 rounded-full mr-2"></div>{" "}
-              Shopping Malls
+              <div className="w-3 h-3 bg-purple-600 rounded-full mr-2"></div>
+              {t("legend_shopping")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-orange-600 rounded-full mr-2"></div>{" "}
-              Grocery Stores
+              <div className="w-3 h-3 bg-orange-600 rounded-full mr-2"></div>
+              {t("legend_groceries")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>{" "}
-              Transport
+              <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>
+              {t("legend_transport")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-teal-600 rounded-full mr-2"></div>{" "}
-              Telecom
+              <div className="w-3 h-3 bg-teal-600 rounded-full mr-2"></div>
+              {t("legend_telecom")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-yellow-600 rounded-full mr-2"></div>{" "}
-              Drive Test Centers
+              <div className="w-3 h-3 bg-yellow-600 rounded-full mr-2"></div>
+              {t("legend_drive_test")}
             </span>
             <span className="flex items-center">
-              <div className="w-3 h-3 bg-gray-600 rounded-full mr-2"></div>{" "}
-              Other Services
+              <div className="w-3 h-3 bg-gray-600 rounded-full mr-2"></div>
+              {t("legend_other")}
             </span>
           </div>
         </div>
@@ -626,10 +639,8 @@ const ServicesPage = () => {
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-red-600 to-white text-white text-center py-6">
-        <p>© 2025 Newcomers Canada Hub. All rights reserved.</p>
-        <p className="text-sm mt-2">
-          Helping international students and newcomers settle in Canada
-        </p>
+        <p>{t("footer_copyright")}</p>
+        <p className="text-sm mt-2">{t("footer_description")}</p>
       </footer>
     </div>
   );

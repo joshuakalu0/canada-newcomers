@@ -1,0 +1,48 @@
+{
+  "en": {
+    "login": {
+      "welcome_title": "Welcome to Canada!",
+      "welcome_description": "Your journey to a new life in Canada starts here. Access resources, find essential services, and connect with the community.",
+      "service_item_1": "Find essential services near you",
+      "service_item_2": "Connect with the community",
+      "service_item_3": "Stay updated on events and resources",
+      "login_title": "Login to Your Account",
+      "email_label": "Email Address",
+      "password_label": "Password",
+      "email_placeholder": "Enter your email",
+      "password_placeholder": "Enter your password",
+      "forgot_password": "Forgot Password?",
+      "login_button": "Login",
+      "login_loading": "Logging in...",
+      "or_continue_with": "Or continue with",
+      "google": "Google",
+      "facebook": "Facebook",
+      "new_user_title": "New to Canada?",
+      "new_user_description": "Create an account to access personalized resources, save locations, and get tailored recommendations for your journey in Canada.",
+      "register_button": "Register Now"
+    }
+  },
+  "fr": {
+    "login": {
+      "welcome_title": "Bienvenue au Canada !",
+      "welcome_description": "Votre voyage vers une nouvelle vie au Canada commence ici. Accédez à des ressources, trouvez des services essentiels et connectez-vous avec la communauté.",
+      "service_item_1": "Trouvez des services essentiels près de chez vous",
+      "service_item_2": "Connectez-vous avec la communauté",
+      "service_item_3": "Restez informé des événements et des ressources",
+      "login_title": "Connectez-vous à votre compte",
+      "email_label": "Adresse e-mail",
+      "password_label": "Mot de passe",
+      "email_placeholder": "Entrez votre e-mail",
+      "password_placeholder": "Entrez votre mot de passe",
+      "forgot_password": "Mot de passe oublié ?",
+      "login_button": "Connexion",
+      "login_loading": "Connexion en cours...",
+      "or_continue_with": "Ou continuez avec",
+      "google": "Google",
+      "facebook": "Facebook",
+      "new_user_title": "Nouveau au Canada ?",
+      "new_user_description": "Créez un compte pour accéder à des ressources personnalisées, enregistrer des emplacements et obtenir des recommandations adaptées pour votre voyage au Canada.",
+      "register_button": "Inscrivez-vous maintenant"
+    }
+  }
+}

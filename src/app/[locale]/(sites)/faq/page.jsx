@@ -1,8 +1,12 @@
 "use client";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const t = useTranslations("faqs");
+  const { locale } = useParams();
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -11,69 +15,52 @@ const FAQ = () => {
   // Student-focused FAQs
   const faqs = [
     {
-      question: "What is Newcomers Canada Hub for students?",
-      answer:
-        "Newcomers Canada Hub is a comprehensive platform designed specifically for international students in Canada. We provide information about campus resources, student housing, academic support, student discounts, and essential services to help you thrive during your studies in Canada.",
+      question: t("faq1_question"),
+      answer: t("faq1_answer"),
     },
     {
-      question: "How can I find student housing near my campus?",
-      answer:
-        "Our platform offers a dedicated student housing section where you can find on-campus residence options, off-campus apartments, roommate matching services, and temporary accommodations. You can filter by price range, distance from campus, and amenities to find the perfect student housing.",
+      question: t("faq2_question"),
+      answer: t("faq2_answer"),
     },
     {
-      question: "What student discounts are available through your platform?",
-      answer:
-        "We maintain a comprehensive database of student discounts across Canada, including deals on textbooks, technology, food, entertainment, transportation, and more. Simply show your valid student ID at participating locations or use our exclusive discount codes online.",
+      question: t("faq3_question"),
+      answer: t("faq3_answer"),
     },
     {
-      question: "How can I connect with other students from my country?",
-      answer:
-        "Our student community section allows you to find and join cultural associations, international student groups, and country-specific clubs at your university. You can also participate in virtual and in-person meetups organized through our events calendar.",
+      question: t("faq4_question"),
+      answer: t("faq4_answer"),
     },
     {
-      question:
-        "What academic resources are available for international students?",
-      answer:
-        "We provide information about tutoring services, writing centers, study groups, library resources, and academic workshops specifically designed for international students. Many of these resources offer specialized support for English language learners.",
+      question: t("faq5_question"),
+      answer: t("faq5_answer"),
     },
     {
-      question: "How do I find on-campus jobs and internships?",
-      answer:
-        "Our career resources section includes listings for on-campus jobs, work-study positions, co-op placements, and internships suitable for international students. We also provide information about work permits, SIN applications, and employment regulations for students.",
+      question: t("faq6_question"),
+      answer: t("faq6_answer"),
     },
     {
-      question: "Are there scholarships available for international students?",
-      answer:
-        "Yes! Our scholarship finder tool helps you discover scholarships, grants, bursaries, and financial aid opportunities specifically for international students. We provide application guidance, deadline reminders, and tips for writing successful scholarship essays.",
+      question: t("faq7_question"),
+      answer: t("faq7_answer"),
     },
     {
-      question:
-        "How can I navigate the Canadian healthcare system as a student?",
-      answer:
-        "We offer comprehensive guides to student health insurance plans, campus health services, walk-in clinics, hospitals, and pharmacies near major universities. Our resources explain how to access mental health support, emergency services, and specialized care.",
+      question: t("faq8_question"),
+      answer: t("faq8_answer"),
     },
     {
-      question:
-        "What support is available for students struggling with coursework?",
-      answer:
-        "Our platform connects you with academic advisors, tutoring services, study skills workshops, and peer mentors who can help with challenging courses. We also provide resources for time management, exam preparation, and addressing language barriers in academic settings.",
+      question: t("faq9_question"),
+      answer: t("faq9_answer"),
     },
     {
-      question: "How can I get involved in campus activities and events?",
-      answer:
-        "Our events calendar features orientation activities, cultural celebrations, networking opportunities, workshops, and social gatherings happening on campuses across Canada. You can filter events by location, interest, and whether they're specifically for international students.",
+      question: t("faq10_question"),
+      answer: t("faq10_answer"),
     },
     {
-      question:
-        "What should I do if I'm experiencing culture shock or homesickness?",
-      answer:
-        "We provide resources for mental health support, cultural adjustment workshops, and community connections to help you navigate the challenges of studying abroad. Many campuses offer counseling services specifically for international students dealing with culture shock, homesickness, or adjustment difficulties.",
+      question: t("faq11_question"),
+      answer: t("faq11_answer"),
     },
     {
-      question:
-        "How can I prepare for post-graduation work and immigration options?",
-      answer:
-        "Our career development section includes information about post-graduation work permits, Canadian experience class immigration pathways, networking opportunities, and job search strategies for international graduates. We also connect students with immigration consultants and career advisors specializing in international student transitions.",
+      question: t("faq12_question"),
+      answer: t("faq12_answer"),
     },
   ];
 
@@ -87,10 +74,10 @@ const FAQ = () => {
         </div>
 
         <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Student FAQs</h1>
-          <p className="text-xl md:text-2xl mb-6">
-            Answers to common questions from international students in Canada
-          </p>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            {t("hero_title")}
+          </h1>
+          <p className="text-xl md:text-2xl mb-6">{t("hero_description")}</p>
         </div>
 
         {/* Bottom wave */}
@@ -158,17 +145,14 @@ const FAQ = () => {
         {/* Contact Section */}
         <div className="mt-12 bg-white border-2 border-[#D52B1E] rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-[#D52B1E] mb-4">
-            Still Have Questions?
+            {t("contact_title")}
           </h2>
-          <p className="text-gray-700 mb-6">
-            Our student support team is ready to help with any questions about
-            your Canadian education journey.
-          </p>
+          <p className="text-gray-700 mb-6">{t("contact_description")}</p>
           <a
-            href="/contact_us"
+            href={`${locale}/contact_us`}
             className="inline-block bg-[#D52B1E] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-semibold"
           >
-            Contact Student Support
+            {t("contact_button")}
           </a>
         </div>
       </main>

@@ -1,0 +1,60 @@
+{
+  "en": {
+    "about": {
+      "hero_title": "About Us",
+      "hero_description": "Supporting International Students in Canada Since 2020",
+      "hero_learn_more_button": "Learn More",
+      "mission_title": "Our Mission",
+      "mission_description_1": "Newcomers Canada Hub was created with a simple yet powerful purpose: to help international students and newcomers settle in Canada with confidence and ease. We understand that arriving in a new country can be overwhelming, with countless services to navigate and information to absorb.",
+      "mission_description_2": "That's why we've built a comprehensive resource that aggregates all essential services—from government agencies and banks to grocery stores and transportation options—into one user-friendly platform. Our goal is to eliminate the stress of finding critical information during your transition period.",
+      "did_you_know_title": "Did You Know?",
+      "did_you_know_description": "Over 500,000 international students and newcomers arrive in Canada each year. Our platform is designed to support every one of them in their journey to build a new life in Canada.",
+      "image_alt": "Newcomers in Canada",
+      "services_connected_label": "Services Connected",
+      "how_we_help_title": "How We Help You Settle In",
+      "card_1_title": "Centralized Information",
+      "card_1_description": "We've gathered all essential services—from government agencies like Service Canada and Service Ontario to banks, grocery stores, and transportation options—into one convenient platform, eliminating the need to search across multiple websites.",
+      "card_2_title": "Location-Based Services",
+      "card_2_description": "Our interactive map shows you the nearest service locations based on your current position, helping you quickly find what you need whether you're looking for a bank, grocery store, or government office.",
+      "card_3_title": "Financial Connections",
+      "card_3_description": "We include specialized services for newcomers, including international money transfer operations like LEMFI and Africhange, making it easier to manage finances between Canada and your home country.",
+      "story_title": "Our Story",
+      "story_description_1": "Newcomers Canada Hub was founded by a team of immigrants who experienced firsthand the challenges of settling in a new country. We remember the confusion of finding essential services, the frustration of navigating government websites, and the anxiety of setting up basic necessities like banking and groceries.",
+      "story_description_2": "Drawing from our personal experiences, we created this platform to help others avoid the same difficulties. Our team includes professionals with backgrounds in immigration services, technology, and community outreach, all dedicated to making the transition to life in Canada as smooth as possible.",
+      "story_description_3": "Today, we continue to expand our services based on user feedback, regularly updating our database of resources and improving our platform to better serve the diverse needs of newcomers from around the world.",
+      "community_title": "Join Our Student Community",
+      "community_description": "Whether you're just starting your academic journey or looking to make the most of your Canadian education experience, we're here to support you every step of the way.",
+      "community_explore_button": "Explore Student Services",
+      "community_join_button": "Join Student Community"
+    }
+  },
+  "fr": {
+    "about": {
+      "hero_title": "À propos de nous",
+      "hero_description": "Soutenir les étudiants internationaux au Canada depuis 2020",
+      "hero_learn_more_button": "En savoir plus",
+      "mission_title": "Notre mission",
+      "mission_description_1": "Newcomers Canada Hub a été créé avec un objectif simple mais puissant : aider les étudiants internationaux et les nouveaux arrivants à s'installer au Canada avec confiance et facilité. Nous comprenons que l'arrivée dans un nouveau pays peut être intimidante, avec d'innombrables services à naviguer et informations à assimiler.",
+      "mission_description_2": "C'est pourquoi nous avons construit une ressource complète qui regroupe tous les services essentiels — des agences gouvernementales et des banques aux épiceries et options de transport — dans une plateforme conviviale. Notre objectif est d'éliminer le stress lié à la recherche d'informations cruciales pendant votre période de transition.",
+      "did_you_know_title": "Le saviez-vous ?",
+      "did_you_know_description": "Plus de 500 000 étudiants internationaux et nouveaux arrivants arrivent au Canada chaque année. Notre plateforme est conçue pour soutenir chacun d'entre eux dans leur parcours pour construire une nouvelle vie au Canada.",
+      "image_alt": "Nouveaux arrivants au Canada",
+      "services_connected_label": "Services connectés",
+      "how_we_help_title": "Comment nous vous aidons à vous installer",
+      "card_1_title": "Information centralisée",
+      "card_1_description": "Nous avons rassemblé tous les services essentiels — des agences gouvernementales comme Service Canada et Service Ontario aux banques, épiceries et options de transport — dans une plateforme pratique, éliminant le besoin de chercher sur plusieurs sites web.",
+      "card_2_title": "Services basés sur la localisation",
+      "card_2_description": "Notre carte interactive vous montre les emplacements de services les plus proches en fonction de votre position actuelle, vous aidant à trouver rapidement ce dont vous avez besoin, que ce soit une banque, une épicerie ou un bureau gouvernemental.",
+      "card_3_title": "Connexions financières",
+      "card_3_description": "Nous incluons des services spécialisés pour les nouveaux arrivants, y compris des opérations de transfert d'argent international comme LEMFI et Africhange, facilitant la gestion des finances entre le Canada et votre pays d'origine.",
+      "story_title": "Notre histoire",
+      "story_description_1": "Newcomers Canada Hub a été fondé par une équipe d'immigrants qui ont vécu directement les défis de s'installer dans un nouveau pays. Nous nous souvenons de la confusion pour trouver des services essentiels, de la frustration de naviguer sur les sites web gouvernementaux et de l'anxiété liée à la mise en place des nécessités de base comme la banque et l'épicerie.",
+      "story_description_2": "En nous appuyant sur nos expériences personnelles, nous avons créé cette plateforme pour aider les autres à éviter les mêmes difficultés. Notre équipe comprend des professionnels ayant une expertise dans les services d'immigration, la technologie et la sensibilisation communautaire, tous dévoués à rendre la transition vers la vie au Canada aussi fluide que possible.",
+      "story_description_3": "Aujourd'hui, nous continuons à élargir nos services en fonction des commentaires des utilisateurs, mettant régulièrement à jour notre base de données de ressources et améliorant notre plateforme pour mieux répondre aux divers besoins des nouveaux arrivants du monde entier.",
+      "community_title": "Rejoignez notre communauté étudiante",
+      "community_description": "Que vous commenciez tout juste votre parcours académique ou que vous cherchiez à tirer le meilleur parti de votre expérience éducative au Canada, nous sommes là pour vous soutenir à chaque étape.",
+      "community_explore_button": "Explorer les services étudiants",
+      "community_join_button": "Rejoindre la communauté étudiante"
+    }
+  }
+}

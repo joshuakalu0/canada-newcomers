@@ -1,5 +1,5 @@
-import { compare } from 'bcryptjs';
-import prisma from './prisma';
+import { compare } from "bcryptjs";
+import prisma from "./prisma";
 
 // Verify user credentials
 export async function verifyCredentials(email, password) {
@@ -8,7 +8,7 @@ export async function verifyCredentials(email, password) {
   });
 
   if (!user) {
-    return null;
+    return { error: "Email/password is invalid" };
   }
 
   const isValid = await compare(password, user.password);
@@ -32,7 +32,7 @@ export function isAuthenticated(session) {
 
 // Check if user is an admin
 export function isAdmin(session) {
-  return session?.user?.role === 'ADMIN';
+  return session?.user?.role === "ADMIN";
 }
 
 // Get current user from database with full details

@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const ContactUs = () => {
@@ -10,6 +12,8 @@ const ContactUs = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const t = useTranslations("support");
+  const { locale } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,12 +57,9 @@ const ContactUs = () => {
 
         <div className="relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            Student Support
+            {t("hero_title")}
           </h1>
-          <p className="text-xl md:text-2xl mb-6">
-            We're here to help with all your questions about student life in
-            Canada
-          </p>
+          <p className="text-xl md:text-2xl mb-6">{t("hero_description")}</p>
         </div>
 
         {/* Bottom wave */}
@@ -86,30 +87,30 @@ const ContactUs = () => {
               className="text-3xl font-bold text-[#D52B1E] mb-6"
               id="academic-form"
             >
-              Student Support Request
+              {t("form_title")}
             </h2>
 
             {isSubmitted ? (
               <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-green-800 mb-2">
-                  Thank You!
+                  {t("form_success_title")}
                 </h3>
                 <p className="text-green-700">
-                  Your message has been sent successfully. We'll get back to you
-                  as soon as possible.
+                  {t("form_success_description")}
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
                   className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
                 >
-                  Send Another Message
+                  {t("form_success_button")}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-gray-700 mb-2">
-                    Your Name <span className="text-[#D52B1E]">*</span>
+                    {t("form_name_label")}{" "}
+                    <span className="text-[#D52B1E]">*</span>
                   </label>
                   <input
                     id="name"
@@ -128,7 +129,8 @@ const ContactUs = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-gray-700 mb-2">
-                    Email Address <span className="text-[#D52B1E]">*</span>
+                    {t("form_email_label")}{" "}
+                    <span className="text-[#D52B1E]">*</span>
                   </label>
                   <input
                     id="email"
@@ -147,7 +149,8 @@ const ContactUs = () => {
 
                 <div>
                   <label htmlFor="subject" className="block text-gray-700 mb-2">
-                    Topic <span className="text-[#D52B1E]">*</span>
+                    {t("form_subject_label")}{" "}
+                    <span className="text-[#D52B1E]">*</span>
                   </label>
                   <select
                     id="subject"
@@ -158,30 +161,32 @@ const ContactUs = () => {
                       errors.subject ? "border-red-600" : ""
                     }`}
                   >
-                    <option value="">Select a topic</option>
-                    <option value="Academic Support">Academic Support</option>
+                    <option value="">{t("form_subject_placeholder")}</option>
+                    <option value="Academic Support">
+                      {t("form_subject_academic")}
+                    </option>
                     <option value="Housing Assistance">
-                      Housing Assistance
+                      {t("form_subject_housing")}
                     </option>
                     <option value="Student Visa">
-                      Student Visa & Immigration
+                      {t("form_subject_visa")}
                     </option>
                     <option value="Financial Aid">
-                      Financial Aid & Scholarships
+                      {t("form_subject_financial")}
                     </option>
                     <option value="Campus Life">
-                      Campus Life & Activities
+                      {t("form_subject_campus")}
                     </option>
                     <option value="Health Services">
-                      Health & Wellness Services
+                      {t("form_subject_health")}
                     </option>
                     <option value="Career Support">
-                      Career & Employment Support
+                      {t("form_subject_career")}
                     </option>
                     <option value="Technical Issue">
-                      Website Technical Issue
+                      {t("form_subject_technical")}
                     </option>
-                    <option value="Other">Other Inquiry</option>
+                    <option value="Other">{t("form_subject_other")}</option>
                   </select>
                   {errors.subject && (
                     <p className="mt-1 text-red-600 text-sm">
@@ -192,7 +197,8 @@ const ContactUs = () => {
 
                 <div>
                   <label htmlFor="message" className="block text-gray-700 mb-2">
-                    Message <span className="text-[#D52B1E]">*</span>
+                    {t("form_message_label")}{" "}
+                    <span className="text-[#D52B1E]">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -216,7 +222,7 @@ const ContactUs = () => {
                     type="submit"
                     className="bg-[#D52B1E] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-semibold"
                   >
-                    Send Message
+                    {t("form_submit_button")}
                   </button>
                 </div>
               </form>
@@ -226,7 +232,7 @@ const ContactUs = () => {
           {/* Contact Information */}
           <div>
             <h2 className="text-3xl font-bold text-[#D52B1E] mb-6">
-              Get in Touch
+              {t("contact_title")}
             </h2>
             <div className="bg-gray-50 border-2 border-[#D52B1E] rounded-lg p-8">
               <div className="space-y-6">
@@ -247,8 +253,10 @@ const ContactUs = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
-                    <p className="text-gray-600">support@newcomerscanada.com</p>
+                    <h3 className="font-semibold text-gray-800 mb-1">
+                      {t("contact_email_label")}
+                    </h3>
+                    <p className="text-gray-600">{t("contact_email")}</p>
                   </div>
                 </div>
 
@@ -269,8 +277,10 @@ const ContactUs = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Phone</h3>
-                    <p className="text-gray-600">+1 (123) 456-7890</p>
+                    <h3 className="font-semibold text-gray-800 mb-1">
+                      {t("contact_phone_label")}
+                    </h3>
+                    <p className="text-gray-600">{t("contact_phone")}</p>
                   </div>
                 </div>
 
@@ -298,22 +308,22 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-1">
-                      Address
+                      {t("contact_address_label")}
                     </h3>
-                    <p className="text-gray-600">
-                      123 Newcomer Street, Toronto, ON M5V 2K1, Canada
-                    </p>
+                    <p className="text-gray-600">{t("contact_address")}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8">
-                <h3 className="font-semibold text-gray-800 mb-4">Follow Us</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {t("contact_follow_us")}
+                </h3>
                 <div className="flex space-x-4">
                   <a
                     href="#"
                     className="bg-[#D52B1E] text-white p-3 rounded-full hover:bg-red-700 transition-colors"
-                    aria-label="Facebook"
+                    aria-label={t("contact_facebook_label")}
                   >
                     <svg
                       className="w-5 h-5"
@@ -326,7 +336,7 @@ const ContactUs = () => {
                   <a
                     href="#"
                     className="bg-[#D52B1E] text-white p-3 rounded-full hover:bg-red-700 transition-colors"
-                    aria-label="Twitter"
+                    aria-label={t("contact_twitter_label")}
                   >
                     <svg
                       className="w-5 h-5"
@@ -339,7 +349,7 @@ const ContactUs = () => {
                   <a
                     href="#"
                     className="bg-[#D52B1E] text-white p-3 rounded-full hover:bg-red-700 transition-colors"
-                    aria-label="Instagram"
+                    aria-label={t("contact_instagram_label")}
                   >
                     <svg
                       className="w-5 h-5"
@@ -353,118 +363,118 @@ const ContactUs = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Student Resources */}
-        <div className="mt-16 bg-gray-50 rounded-lg p-8 border-2 border-[#D52B1E]">
-          <h2 className="text-3xl font-bold text-[#D52B1E] mb-8 text-center">
-            Student Resources
-          </h2>
+          {/* Student Resources */}
+          <div className="mt-16 bg-gray-50 col-span-2 rounded-lg p-8 border-2 border-[#D52B1E]">
+            <h2 className="text-3xl font-bold text-[#D52B1E] mb-8 text-center">
+              {t("resources_title")}
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a
-              href="/resources/academic"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">📚</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Academic Resources
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Study guides, tutoring services, and academic support
-              </p>
-            </a>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <a
+                href={`${locale}/resources/academic`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">📚</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_academic_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_academic_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/housing"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">🏠</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Housing Directory
-              </h3>
-              <p className="text-gray-600 text-sm">
-                On-campus and off-campus housing options for students
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/housing`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">🏠</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_housing_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_housing_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/financial"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">💰</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Financial Aid
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Scholarships, grants, and student financial resources
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/financial`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">💰</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_financial_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_financial_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/health"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">💊</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Health Services
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Student health insurance and wellness resources
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/health`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">💊</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_health_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_health_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/career"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">💼</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Career Center
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Job search, resume help, and career development
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/career`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">💼</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_career_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_career_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/immigration"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">📃</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Immigration Support
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Visa guidance, study permits, and immigration resources
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/immigration`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">📃</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_immigration_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_immigration_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/community"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">🌎</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Student Community
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Cultural groups, student clubs, and campus activities
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/community`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">🌎</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_community_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_community_description")}
+                </p>
+              </a>
 
-            <a
-              href="/resources/discounts"
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
-            >
-              <div className="text-3xl text-[#D52B1E] mb-3">🛒</div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Student Discounts
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Special deals and offers exclusively for students
-              </p>
-            </a>
+              <a
+                href={`${locale}/resources/discounts`}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all text-center"
+              >
+                <div className="text-3xl text-[#D52B1E] mb-3">🛒</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {t("resource_discounts_title")}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {t("resource_discounts_description")}
+                </p>
+              </a>
+            </div>
           </div>
         </div>
       </main>

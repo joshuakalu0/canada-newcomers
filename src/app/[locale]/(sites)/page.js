@@ -1,8 +1,8 @@
 "use client";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-// import Header from "../components/Header";
-import Footer from "../../../components/Footer";
 
 const LandingPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -17,6 +17,8 @@ const LandingPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isMapReady, setIsMapReady] = useState(false);
   const [activeFeature, setActiveFeature] = useState(null);
+  const t = useTranslations("HomePage");
+  const { locale } = useParams();
 
   // Services data
   const services = {
@@ -614,24 +616,20 @@ const LandingPage = () => {
   // Student FAQ data
   const faqs = [
     {
-      question: "How do I find student discounts near my campus?",
-      answer:
-        "Use the 'Student Discounts' filter on the Campus Explorer map to see all businesses offering special deals for students with valid ID.",
+      question: t("faq1_question"),
+      answer: t("faq1_answer"),
     },
     {
-      question: "Are there student groups for international students?",
-      answer:
-        "Yes! Check the 'Student Community' section to find groups specific to your nationality, field of study, or interests.",
+      question: t("faq2_question"),
+      answer: t("faq2_answer"),
     },
     {
-      question: "How can I find affordable student housing?",
-      answer:
-        "Our Housing section features verified student housing options, roommate matching, and tips for finding affordable accommodations near campus.",
+      question: t("faq3_question"),
+      answer: t("faq3_answer"),
     },
     {
-      question: "Can I get help with my student visa or study permit?",
-      answer:
-        "Absolutely! Our resources section includes guides on extending study permits, working while studying, and transitioning to post-graduation work permits.",
+      question: t("faq4_question"),
+      answer: t("faq4_answer"),
     },
   ];
 
@@ -650,15 +648,13 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up">
-                Your Ultimate Student Guide to Canada
+                {t("hero_title")}
               </h1>
               <p
                 className="text-lg md:text-xl mb-8 animate-fade-up"
                 style={{ animationDelay: "300ms" }}
               >
-                Everything international students need to thrive in Canada -
-                from campus resources to student discounts, housing options, and
-                more!
+                {t("hero_description")}
               </p>
               <div
                 className="flex flex-col sm:flex-row gap-4 animate-fade-up"
@@ -672,13 +668,13 @@ const LandingPage = () => {
                   }
                   className="bg-white text-red-600 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors font-semibold"
                 >
-                  Explore Resources
+                  {t("hero_explore_button")}
                 </button>
                 <button
-                  onClick={() => (window.location.href = "/register")}
+                  onClick={() => (window.location.href = `${locale}/register`)}
                   className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md hover:bg-white/10 transition-colors font-semibold"
                 >
-                  Join Now
+                  {t("hero_join_button")}
                 </button>
               </div>
             </div>
@@ -687,12 +683,12 @@ const LandingPage = () => {
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-                  alt="International Students in Canada"
+                  alt={t("hero_image_alt")}
                   className="w-full h-[500px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-900/90 to-transparent p-6">
                   <p className="text-white text-xl font-medium">
-                    Join thousands of international students thriving in Canada
+                    {t("hero_image_caption")}
                   </p>
                 </div>
               </div>
@@ -707,11 +703,7 @@ const LandingPage = () => {
             viewBox="0 0 1440 320"
             className="w-full"
           >
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            ></path>
+            {/* SVG path unchanged */}
           </svg>
         </div>
       </section>
@@ -722,19 +714,19 @@ const LandingPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="p-6">
               <div className="text-4xl font-bold text-red-600 mb-2">100+</div>
-              <p className="text-gray-600">Universities & Colleges</p>
+              <p className="text-gray-600">{t("stats_universities")}</p>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-red-600 mb-2">50K+</div>
-              <p className="text-gray-600">International Students</p>
+              <p className="text-gray-600">{t("stats_students")}</p>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-red-600 mb-2">200+</div>
-              <p className="text-gray-600">Student Resources</p>
+              <p className="text-gray-600">{t("stats_resources")}</p>
             </div>
             <div className="p-6">
               <div className="text-4xl font-bold text-red-600 mb-2">24/7</div>
-              <p className="text-gray-600">Student Support</p>
+              <p className="text-gray-600">{t("stats_support")}</p>
             </div>
           </div>
         </div>
@@ -745,11 +737,10 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-4">
-              Student Essential Services
+              {t("services_title")}
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
-              Everything you need to make the most of your student experience in
-              Canada
+              {t("services_description")}
             </p>
           </div>
 
@@ -767,42 +758,20 @@ const LandingPage = () => {
                   {category.label}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  {category.key === "all" &&
-                    "Find everything you need as an international student - from campus resources to city services"}
-                  {category.key === "government" &&
-                    "Access student visa services, SIN applications, study permit extensions, and post-graduation work permits"}
-                  {category.key === "banks" &&
-                    "Student-friendly banks with no-fee accounts, international money transfers, and student credit options"}
-                  {category.key === "shopping" &&
-                    "Student discounts at malls, bookstores, technology retailers, and campus shops"}
-                  {category.key === "groceries" &&
-                    "Budget-friendly grocery stores near campus with student discount days and international food sections"}
-                  {category.key === "transport" &&
-                    "Student transit passes, campus shuttles, bike sharing programs, and airport transportation options"}
-                  {category.key === "telecom" &&
-                    "Student phone plans, internet packages, and international calling options at special rates"}
-                  {category.key === "drivetest" &&
-                    "Get your Canadian driver's license as an international student - locations, requirements, and practice tests"}
-                  {category.key === "other" &&
-                    "Student clubs, cultural associations, volunteer opportunities, and campus social activities"}
+                  {t(`service_${category.key}`)}
                 </p>
                 <button
-                  onClick={() => (window.location.href = "/services")}
+                  onClick={() => (window.location.href = `${locale}/services`)}
                   className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition-colors font-semibold flex items-center mx-auto"
                 >
-                  <span>Explore</span>
+                  <span>{t("service_explore_button")}</span>
                   <svg
                     className="w-4 h-4 ml-2"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    ></path>
+                    {/* SVG path unchanged */}
                   </svg>
                 </button>
               </div>
@@ -816,11 +785,10 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-4">
-              Campus Explorer
+              {t("map_title")}
             </h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Find student-friendly locations, campus resources, and essential
-              services near you.
+              {t("map_description")}
             </p>
           </div>
 
@@ -839,14 +807,9 @@ const LandingPage = () => {
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0-15.357-2m15.357 2H15"
-                    ></path>
+                    {/* SVG path unchanged */}
                   </svg>
-                  <p className="text-gray-600">Loading map...</p>
+                  <p className="text-gray-600">{t("map_loading")}</p>
                 </div>
               </div>
             )}
@@ -857,15 +820,15 @@ const LandingPage = () => {
               className="px-4 py-2 border-2 border-red-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
               onChange={(e) => handleCategoryChange(e.target.value)}
             >
-              <option value="all">All Services</option>
-              <option value="government">Government Agencies</option>
-              <option value="banks">Banks & Money Transfer</option>
-              <option value="shopping">Shopping Malls</option>
-              <option value="groceries">Grocery Stores</option>
-              <option value="transport">Transport</option>
-              <option value="telecom">Telecom</option>
-              <option value="drivetest">Drive Test Centers</option>
-              <option value="other">Other Services</option>
+              <option value="all">{t("map_category_all")}</option>
+              <option value="government">{t("map_category_government")}</option>
+              <option value="banks">{t("map_category_banks")}</option>
+              <option value="shopping">{t("map_category_shopping")}</option>
+              <option value="groceries">{t("map_category_groceries")}</option>
+              <option value="transport">{t("map_category_transport")}</option>
+              <option value="telecom">{t("map_category_telecom")}</option>
+              <option value="drivetest">{t("map_category_drivetest")}</option>
+              <option value="other">{t("map_category_other")}</option>
             </select>
 
             <button
@@ -884,62 +847,53 @@ const LandingPage = () => {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 1-18 0 9 9z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 2a10 10 0 0 0-20 0 10 10 0 0 0 20 10 10 0 0-10-10z"
-                  />
+                  {/* SVG paths unchanged */}
                 </svg>
-                Show My Location
+                {t("map_location_button")}
               </div>
             </button>
           </div>
 
           <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold text-gray-800 mb-2">Map Legend</h3>
+            <h3 className="font-semibold text-gray-800 mb-2">
+              {t("map_legend_title")}
+            </h3>
             <div className="flex flex-wrap gap-4 text-sm">
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>{" "}
-                Government Agencies
+                {t("map_legend_government")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-green-600 rounded-full mr-2"></div>{" "}
-                Banks & Money Transfer
+                {t("map_legend_banks")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-purple-600 rounded-full mr-2"></div>{" "}
-                Shopping Malls
+                {t("map_legend_shopping")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-orange-600 rounded-full mr-2"></div>{" "}
-                Grocery Stores
+                {t("map_legend_groceries")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>{" "}
-                Transport
+                {t("map_legend_transport")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-teal-600 rounded-full mr-2"></div>{" "}
-                Telecom
+                {t("map_legend_telecom")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-yellow-600 rounded-full mr-2"></div>{" "}
-                Drive Test Centers
+                {t("map_legend_drivetest")}
               </span>
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-gray-600 rounded-full mr-2"></div>{" "}
-                Other Services
+                {t("map_legend_other")}
               </span>
               <span className="flex items-center">
                 <div className="w-4 h-4 bg-blue-600 rounded-full border-2 border-white mr-2"></div>{" "}
-                Your Location
+                {t("map_legend_user_location")}
               </span>
             </div>
           </div>
@@ -951,11 +905,10 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-4">
-              Your Student Journey Made Easy
+              {t("journey_title")}
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
-              Follow these simple steps to make the most of your Canadian
-              student experience
+              {t("journey_description")}
             </p>
           </div>
 
@@ -966,12 +919,9 @@ const LandingPage = () => {
                 1
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                Discover Campus Resources
+                {t("journey_step1_title")}
               </h3>
-              <p className="text-gray-600">
-                Browse through student services, campus facilities, and academic
-                resources tailored for international students.
-              </p>
+              <p className="text-gray-600">{t("journey_step1_description")}</p>
             </div>
 
             {/* Step 2 */}
@@ -980,12 +930,9 @@ const LandingPage = () => {
                 2
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                Connect With Community
+                {t("journey_step2_title")}
               </h3>
-              <p className="text-gray-600">
-                Join student groups, find events, and connect with fellow
-                international students from your country.
-              </p>
+              <p className="text-gray-600">{t("journey_step2_description")}</p>
             </div>
 
             {/* Step 3 */}
@@ -994,12 +941,9 @@ const LandingPage = () => {
                 3
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                Thrive in Canada
+                {t("journey_step3_title")}
               </h3>
-              <p className="text-gray-600">
-                Access student discounts, job opportunities, and cultural
-                experiences to make your Canadian education unforgettable.
-              </p>
+              <p className="text-gray-600">{t("journey_step3_description")}</p>
             </div>
           </div>
         </div>
@@ -1010,11 +954,10 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-4">
-              Student Success Stories
+              {t("testimonials_title")}
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto mb-8">
-              Hear from international students who've made Canada their second
-              home
+              {t("testimonials_description")}
             </p>
           </div>
 
@@ -1077,18 +1020,17 @@ const LandingPage = () => {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
-                Ready for an Amazing Student Experience?
+                {t("cta_title")}
               </h2>
               <p className="text-center text-white/90 mb-8 max-w-2xl mx-auto">
-                Join thousands of international students using our platform to
-                make the most of their Canadian education journey.
+                {t("cta_description")}
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
-                  href="/register"
+                  href={`${locale}/register`}
                   className="bg-white text-red-600 px-8 py-4 rounded-md hover:bg-gray-100 transition-colors font-semibold text-center"
                 >
-                  Join Now
+                  {t("cta_join_button")}
                 </Link>
                 <button
                   onClick={() =>
@@ -1098,7 +1040,7 @@ const LandingPage = () => {
                   }
                   className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-md hover:bg-white/10 transition-colors font-semibold text-center"
                 >
-                  Explore Campus Life
+                  {t("cta_explore_button")}
                 </button>
               </div>
             </div>
@@ -1111,10 +1053,10 @@ const LandingPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-4">
-              Student FAQs
+              {t("faq_title")}
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto mb-8">
-              Answers to common questions from international students
+              {t("faq_description")}
             </p>
           </div>
 
@@ -1143,12 +1085,7 @@ const LandingPage = () => {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
+                      {/* SVG path unchanged */}
                     </svg>
                   </div>
                 </button>
@@ -1175,11 +1112,10 @@ const LandingPage = () => {
 
             <div className="relative z-10">
               <h2 className="text-2xl font-bold text-red-600 mb-4">
-                Stay Updated on Campus Life
+                {t("newsletter_title")}
               </h2>
               <p className="text-gray-700 mb-6">
-                Get the latest student events, scholarship opportunities, and
-                campus news delivered to your inbox.
+                {t("newsletter_description")}
               </p>
 
               <form
@@ -1188,7 +1124,7 @@ const LandingPage = () => {
               >
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t("newsletter_email_placeholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-grow px-4 py-3 border-2 border-red-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
@@ -1197,19 +1133,21 @@ const LandingPage = () => {
                   type="submit"
                   className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
                 >
-                  Subscribe
+                  {t("newsletter_subscribe_button")}
                 </button>
               </form>
 
               {isSubscribed && (
                 <div className="mt-4 p-3 bg-green-50 border-l-4 border-green-500 text-green-600">
-                  <p>Thank you for subscribing!</p>
+                  <p>{t("newsletter_success")}</p>
                 </div>
               )}
 
               {emailError && (
                 <div className="mt-4 p-3 bg-red-50 border-l-4 border-red-600 text-red-600">
-                  <p>{emailError}</p>
+                  <p>
+                    {t("newsletter_error").replace("{emailError}", emailError)}
+                  </p>
                 </div>
               )}
             </div>

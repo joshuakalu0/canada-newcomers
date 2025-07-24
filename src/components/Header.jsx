@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "./LanguageSelector";
+import { useParams } from "next/navigation";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,7 +13,8 @@ const Header = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
-  const t = useTranslations();
+  const t = useTranslations("navbar");
+  const { locale } = useParams();
 
   // Handle scroll
   useEffect(() => {
@@ -57,7 +59,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
-            href="/"
+            href={`${locale}/`}
             className={`flex items-center space-x-2 font-bold text-xl md:text-2xl ${
               isScrolled ? "text-[#D52B1E]" : "text-white"
             } transition-colors`}
@@ -93,27 +95,27 @@ const Header = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
-              href="/"
+              href={`${locale}/`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
                   : "text-white hover:text-gray-100 font-medium"
               }
             >
-              {t("header.home")}
+              {t("home")}
             </Link>
             <Link
-              href="/about"
+              href={`${locale}/about`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
                   : "text-white hover:text-gray-100 font-medium"
               }
             >
-              {t("header.about")}
+              {t("about")}
             </Link>
             <Link
-              href="/services"
+              href={`${locale}/services`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
@@ -123,7 +125,7 @@ const Header = () => {
               Services
             </Link>
             <Link
-              href="/map"
+              href={`${locale}/map`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
@@ -133,24 +135,24 @@ const Header = () => {
               Map
             </Link>
             <Link
-              href="/contact_us"
+              href={`${locale}/contact_us`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
                   : "text-white hover:text-gray-100 font-medium"
               }
             >
-              {t("header.contact")}
+              {t("contact")}
             </Link>
             <Link
-              href="/faq"
+              href={`${locale}/faq`}
               className={
                 isScrolled
                   ? "text-[#D52B1E] hover:text-[#b91c1c] font-medium"
                   : "text-white hover:text-gray-100 font-medium"
               }
             >
-              {t("header.faq")}
+              {t("faq")}
             </Link>
 
             {/* Language Selector */}
@@ -198,20 +200,20 @@ const Header = () => {
                       transition={{ duration: 0.2 }}
                     >
                       <Link
-                        href="/profile"
+                        href={`${locale}/profile`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                       >
                         Your Profile
                       </Link>
                       <Link
-                        href="/saved-locations"
+                        href={`${locale}/saved-locations`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                       >
                         Saved Locations
                       </Link>
                       {session?.user?.role === "ADMIN" && (
                         <Link
-                          href="/admin"
+                          href={`${locale}/admin`}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                         >
                           Admin Dashboard
@@ -230,24 +232,24 @@ const Header = () => {
             ) : (
               <div className="flex items-center space-x-4">
                 <Link
-                  href="/login"
+                    href={`${locale}/login`}
                   className={`${
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c]"
                       : "text-white hover:text-gray-100"
                   } font-medium`}
                 >
-                  {t("header.login")}
+                  {t("login")}
                 </Link>
                 <Link
-                  href="/register"
+                  href={`${locale}/register`}
                   className={`${
                     isScrolled
                       ? "bg-[#D52B1E] text-white"
                       : "bg-white text-[#D52B1E]"
                   } px-4 py-1 rounded-md hover:opacity-90 transition-opacity font-medium`}
                 >
-                  {t("header.register")}
+                  {t("register")}
                 </Link>
               </div>
             )}
@@ -313,7 +315,7 @@ const Header = () => {
             >
               <div className="flex flex-col space-y-4 px-2">
                 <Link
-                  href="/"
+                  href={`${locale}/`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -321,10 +323,10 @@ const Header = () => {
                   }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t("header.home")}
+                  {t("home")}
                 </Link>
                 <Link
-                  href="/about"
+                  href={`${locale}/about`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -332,10 +334,10 @@ const Header = () => {
                   }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t("header.about")}
+                  {t("about")}
                 </Link>
                 <Link
-                  href="/services"
+                  href={`${locale}/services`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -346,7 +348,7 @@ const Header = () => {
                   Services
                 </Link>
                 <Link
-                  href="/map"
+                  href={`${locale}/map`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -357,7 +359,7 @@ const Header = () => {
                   Map
                 </Link>
                 <Link
-                  href="/contact_us"
+                  href={`${locale}/contact_us`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -365,10 +367,10 @@ const Header = () => {
                   }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t("header.contact")}
+                  {t("contact")}
                 </Link>
                 <Link
-                  href="/faq"
+                  href={`${locale}/faq`}
                   className={
                     isScrolled
                       ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -376,13 +378,13 @@ const Header = () => {
                   }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t("header.faq")}
+                  {t("faq")}
                 </Link>
 
                 {!isAuthenticated && (
                   <div className="flex flex-col space-y-2 pt-2 border-t border-white/20">
                     <Link
-                      href="/login"
+                      href={`${locale}/login`}
                       className={
                         isScrolled
                           ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100 text-center"
@@ -390,10 +392,10 @@ const Header = () => {
                       }
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {t("header.login")}
+                      {t("login")}
                     </Link>
                     <Link
-                      href="/register"
+                      href={`${locale}/register`}
                       className={
                         isScrolled
                           ? "bg-[#D52B1E] text-white px-3 py-2 rounded-md hover:bg-[#b91c1c] text-center"
@@ -401,7 +403,7 @@ const Header = () => {
                       }
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {t("header.register")}
+                      {t("register")}
                     </Link>
                   </div>
                 )}
@@ -409,7 +411,7 @@ const Header = () => {
                 {isAuthenticated && (
                   <div className="flex flex-col space-y-2 pt-2 border-t border-white/20">
                     <Link
-                      href="/profile"
+                      href={`${locale}/profile`}
                       className={
                         isScrolled
                           ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -420,7 +422,7 @@ const Header = () => {
                       Your Profile
                     </Link>
                     <Link
-                      href="/saved-locations"
+                      href={`${locale}/saved-locations`}
                       className={
                         isScrolled
                           ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -432,7 +434,7 @@ const Header = () => {
                     </Link>
                     {session?.user?.role === "ADMIN" && (
                       <Link
-                        href="/admin"
+                        href={`${locale}/admin`}
                         className={
                           isScrolled
                             ? "text-[#D52B1E] hover:text-[#b91c1c] px-3 py-2 rounded-md hover:bg-gray-100"
@@ -474,14 +476,14 @@ const Header = () => {
               transition={{ duration: 0.2 }}
             >
               <Link
-                href="/profile"
+                href={`${locale}/profile`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                 onClick={() => setShowUserMenu(false)}
               >
                 Your Profile
               </Link>
               <Link
-                href="/saved-locations"
+                href={`${locale}/saved-locations`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                 onClick={() => setShowUserMenu(false)}
               >
@@ -489,7 +491,7 @@ const Header = () => {
               </Link>
               {session?.user?.role === "ADMIN" && (
                 <Link
-                  href="/admin"
+                  href={`${locale}/admin`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50"
                   onClick={() => setShowUserMenu(false)}
                 >

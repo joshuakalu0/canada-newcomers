@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const UserDashboard = () => {
   const { data: session, status } = useSession();
@@ -13,6 +14,8 @@ const UserDashboard = () => {
   const [recentServices, setRecentServices] = useState([]);
   const [weatherData, setWeatherData] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
+  const t = useTranslations("dashboard");
+  const { locale } = useParams();
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -170,12 +173,11 @@ const UserDashboard = () => {
               className="mb-6 md:mb-0"
             >
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                Welcome, {session?.user?.name || "Newcomer"}!
+                {t("hero_title", {
+                  name: session?.user?.name || t("hero_title_default"),
+                })}
               </h1>
-              <p className="text-lg text-white/90">
-                Your Canadian journey starts here. Explore resources tailored
-                for you.
-              </p>
+              <p className="text-lg text-white/90">{t("hero_description")}</p>
             </motion.div>
 
             {weatherData && (
@@ -212,36 +214,44 @@ const UserDashboard = () => {
             >
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Quick Actions
+                  {t("quick_actions_title")}
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <Link
-                    href="/map"
+                    href={`${locale}/map`}
                     className="bg-red-50 hover:bg-red-100 transition-colors p-4 rounded-lg text-center"
                   >
                     <div className="text-3xl mb-2">🗺️</div>
-                    <p className="font-medium text-gray-800">Explore Map</p>
+                    <p className="font-medium text-gray-800">
+                      {t("quick_action_map")}
+                    </p>
                   </Link>
                   <Link
-                    href="/services"
+                    href={`${locale}/services`}
                     className="bg-blue-50 hover:bg-blue-100 transition-colors p-4 rounded-lg text-center"
                   >
                     <div className="text-3xl mb-2">🏛️</div>
-                    <p className="font-medium text-gray-800">Find Services</p>
+                    <p className="font-medium text-gray-800">
+                      {t("quick_action_services")}
+                    </p>
                   </Link>
                   <Link
-                    href="/saved-locations"
+                    href={`${locale}/saved-locations`}
                     className="bg-green-50 hover:bg-green-100 transition-colors p-4 rounded-lg text-center"
                   >
                     <div className="text-3xl mb-2">⭐</div>
-                    <p className="font-medium text-gray-800">Saved Places</p>
+                    <p className="font-medium text-gray-800">
+                      {t("quick_action_saved_places")}
+                    </p>
                   </Link>
                   <Link
-                    href="/profile"
+                    href={`${locale}/profile`}
                     className="bg-purple-50 hover:bg-purple-100 transition-colors p-4 rounded-lg text-center"
                   >
                     <div className="text-3xl mb-2">👤</div>
-                    <p className="font-medium text-gray-800">My Profile</p>
+                    <p className="font-medium text-gray-800">
+                      {t("quick_action_profile")}
+                    </p>
                   </Link>
                 </div>
               </div>
@@ -250,13 +260,13 @@ const UserDashboard = () => {
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-2xl font-bold text-gray-800">
-                    Essential Services
+                    {t("essential_services_title")}
                   </h2>
                   <Link
-                    href="/services"
+                    href={`${locale}/services`}
                     className="text-red-600 hover:text-red-700 font-medium"
                   >
-                    View All
+                    {t("essential_services_view_all")}
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -281,7 +291,7 @@ const UserDashboard = () => {
                             href={service.url}
                             className="text-sm text-red-600 hover:underline mt-2 inline-block"
                           >
-                            Learn More →
+                            {t("essential_services_learn_more")}
                           </Link>
                         </div>
                       </div>
@@ -293,46 +303,49 @@ const UserDashboard = () => {
               {/* Recent News */}
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Recent News
+                  {t("recent_news_title")}
                 </h2>
                 <div className="space-y-4">
                   <div className="border-l-4 border-red-600 pl-4">
                     <h3 className="font-medium text-gray-800">
-                      New Immigration Pathways Announced
+                      {t("news_item_1_title")}
                     </h3>
                     <p className="text-sm text-gray-600 mb-1">
-                      The Canadian government has announced new pathways for
-                      permanent residency.
+                      {t("news_item_1_description")}
                     </p>
-                    <p className="text-xs text-gray-500">June 15, 2023</p>
+                    <p className="text-xs text-gray-500">
+                      {t("news_item_1_date")}
+                    </p>
                   </div>
                   <div className="border-l-4 border-red-600 pl-4">
                     <h3 className="font-medium text-gray-800">
-                      Student Visa Processing Times Improved
+                      {t("news_item_2_title")}
                     </h3>
                     <p className="text-sm text-gray-600 mb-1">
-                      Processing times for student visas have been reduced by
-                      30%.
+                      {t("news_item_2_description")}
                     </p>
-                    <p className="text-xs text-gray-500">May 28, 2023</p>
+                    <p className="text-xs text-gray-500">
+                      {t("news_item_2_date")}
+                    </p>
                   </div>
                   <div className="border-l-4 border-red-600 pl-4">
                     <h3 className="font-medium text-gray-800">
-                      Healthcare Coverage for Newcomers
+                      {t("news_item_3_title")}
                     </h3>
                     <p className="text-sm text-gray-600 mb-1">
-                      New healthcare coverage options available for recent
-                      immigrants.
+                      {t("news_item_3_description")}
                     </p>
-                    <p className="text-xs text-gray-500">May 12, 2023</p>
+                    <p className="text-xs text-gray-500">
+                      {t("news_item_3_date")}
+                    </p>
                   </div>
                 </div>
                 <div className="mt-4 text-center">
                   <Link
-                    href="/news"
+                    href={`${locale}/news`}
                     className="text-red-600 hover:text-red-700 font-medium"
                   >
-                    View All News
+                    {t("recent_news_view_all")}
                   </Link>
                 </div>
               </div>
@@ -348,13 +361,13 @@ const UserDashboard = () => {
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold text-gray-800">
-                    Saved Locations
+                    {t("saved_locations_title")}
                   </h2>
                   <Link
-                    href="/saved-locations"
+                    href={`${locale}/saved-locations`}
                     className="text-sm text-red-600 hover:text-red-700"
                   >
-                    View All
+                    {t("saved_locations_view_all")}
                   </Link>
                 </div>
                 {savedLocations.length > 0 ? (
@@ -375,10 +388,10 @@ const UserDashboard = () => {
                             href={`/map?location=${location.id}`}
                             className="text-xs text-red-600 hover:underline mr-4"
                           >
-                            View on Map
+                            {t("saved_locations_view_on_map")}
                           </Link>
                           <button className="text-xs text-gray-500 hover:text-gray-700">
-                            Remove
+                            {t("saved_locations_remove")}
                           </button>
                         </div>
                       </div>
@@ -386,8 +399,7 @@ const UserDashboard = () => {
                   </div>
                 ) : (
                   <p className="text-gray-600 text-center py-4">
-                    No saved locations yet. Explore the map to save your
-                    favorite places.
+                    {t("saved_locations_empty")}
                   </p>
                 )}
               </div>
@@ -402,25 +414,19 @@ const UserDashboard = () => {
           <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-lg p-8 text-white">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-2xl font-bold mb-4">
-                  Need Help Finding Resources?
-                </h2>
-                <p className="mb-6">
-                  Our interactive map helps you locate essential services near
-                  you. Find government offices, banks, healthcare facilities,
-                  and more.
-                </p>
+                <h2 className="text-2xl font-bold mb-4">{t("cta_title")}</h2>
+                <p className="mb-6">{t("cta_description")}</p>
                 <Link
-                  href="/map"
+                  href={`${locale}/map`}
                   className="inline-block bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium"
                 >
-                  Explore the Map
+                  {t("cta_button")}
                 </Link>
               </div>
               <div className="hidden md:block">
                 <img
                   src="/images/map-preview.jpg"
-                  alt="Interactive Map Preview"
+                  alt={t("cta_image_alt")}
                   className="rounded-lg shadow-lg"
                 />
               </div>

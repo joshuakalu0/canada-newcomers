@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
@@ -22,6 +24,8 @@ const ProfilePage = () => {
   const [feedback, setFeedback] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const t = useTranslations("profile");
+  const { locale } = useParams();
 
   // Fetch user data
   useEffect(() => {
@@ -166,7 +170,6 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Profile Header */}
-
       <section className="bg-gradient-to-r from-[#D52B1E] to-[#b91c1c] text-white pt-24 pb-8 px-4">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
@@ -200,7 +203,7 @@ const ProfilePage = () => {
                       d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                     />
                   </svg>
-                  Edit Profile
+                  {t("edit_button")}
                 </button>
               )}
             </div>
@@ -269,7 +272,7 @@ const ProfilePage = () => {
               {/* Profile Card */}
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                  Profile Information
+                  {t("profile_info_title")}
                 </h2>
 
                 {isEditing ? (
@@ -280,7 +283,7 @@ const ProfilePage = () => {
                           htmlFor="name"
                           className="block text-gray-700 mb-2 font-medium"
                         >
-                          Full Name
+                          {t("form_name_label")}
                         </label>
                         <input
                           id="name"
@@ -298,7 +301,7 @@ const ProfilePage = () => {
                           htmlFor="email"
                           className="block text-gray-700 mb-2 font-medium"
                         >
-                          Email Address
+                          {t("form_email_label")}
                         </label>
                         <input
                           id="email"
@@ -308,7 +311,7 @@ const ProfilePage = () => {
                           disabled
                         />
                         <p className="text-sm text-gray-500 mt-1">
-                          Email cannot be changed
+                          {t("form_email_note")}
                         </p>
                       </div>
 
@@ -317,7 +320,7 @@ const ProfilePage = () => {
                           htmlFor="country"
                           className="block text-gray-700 mb-2 font-medium"
                         >
-                          Country of Origin
+                          {t("form_country_label")}
                         </label>
                         <select
                           id="country"
@@ -326,15 +329,25 @@ const ProfilePage = () => {
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
                         >
-                          <option value="">Select your country</option>
-                          <option value="Canada">Canada</option>
-                          <option value="India">India</option>
-                          <option value="China">China</option>
-                          <option value="Nigeria">Nigeria</option>
-                          <option value="Philippines">Philippines</option>
-                          <option value="United Kingdom">United Kingdom</option>
-                          <option value="United States">United States</option>
-                          <option value="Other">Other</option>
+                          <option value="">
+                            {t("form_country_placeholder")}
+                          </option>
+                          <option value="Canada">{t("country_canada")}</option>
+                          <option value="India">{t("country_india")}</option>
+                          <option value="China">{t("country_china")}</option>
+                          <option value="Nigeria">
+                            {t("country_nigeria")}
+                          </option>
+                          <option value="Philippines">
+                            {t("country_philippines")}
+                          </option>
+                          <option value="United Kingdom">
+                            {t("country_united_kingdom")}
+                          </option>
+                          <option value="United States">
+                            {t("country_united_states")}
+                          </option>
+                          <option value="Other">{t("country_other")}</option>
                         </select>
                       </div>
 
@@ -343,7 +356,7 @@ const ProfilePage = () => {
                           htmlFor="language"
                           className="block text-gray-700 mb-2 font-medium"
                         >
-                          Preferred Language
+                          {t("form_language_label")}
                         </label>
                         <select
                           id="language"
@@ -353,14 +366,20 @@ const ProfilePage = () => {
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
                         >
                           <option value="">
-                            Select your preferred language
+                            {t("form_language_placeholder")}
                           </option>
-                          <option value="English">English</option>
-                          <option value="French">French</option>
-                          <option value="Spanish">Spanish</option>
-                          <option value="Chinese">Chinese</option>
-                          <option value="Arabic">Arabic</option>
-                          <option value="Other">Other</option>
+                          <option value="English">
+                            {t("language_english")}
+                          </option>
+                          <option value="French">{t("language_french")}</option>
+                          <option value="Spanish">
+                            {t("language_spanish")}
+                          </option>
+                          <option value="Chinese">
+                            {t("language_chinese")}
+                          </option>
+                          <option value="Arabic">{t("language_arabic")}</option>
+                          <option value="Other">{t("language_other")}</option>
                         </select>
                       </div>
 
@@ -370,13 +389,13 @@ const ProfilePage = () => {
                           onClick={handleCancelEdit}
                           className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
                         >
-                          Cancel
+                          {t("form_cancel_button")}
                         </button>
                         <button
                           type="submit"
                           className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
                         >
-                          Save Changes
+                          {t("form_save_button")}
                         </button>
                       </div>
                     </div>
@@ -386,7 +405,7 @@ const ProfilePage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <h3 className="text-sm font-medium text-gray-500">
-                          Full Name
+                          {t("form_name_label")}
                         </h3>
                         <p className="mt-1 text-lg text-gray-800">
                           {userData.name}
@@ -394,7 +413,7 @@ const ProfilePage = () => {
                       </div>
                       <div>
                         <h3 className="text-sm font-medium text-gray-500">
-                          Email Address
+                          {t("form_email_label")}
                         </h3>
                         <p className="mt-1 text-lg text-gray-800">
                           {userData.email}
@@ -402,18 +421,26 @@ const ProfilePage = () => {
                       </div>
                       <div>
                         <h3 className="text-sm font-medium text-gray-500">
-                          Country of Origin
+                          {t("form_country_label")}
                         </h3>
                         <p className="mt-1 text-lg text-gray-800">
-                          {userData.country || "Not specified"}
+                          {userData.country
+                            ? t(
+                                `country_${userData.country
+                                  .toLowerCase()
+                                  .replace(/\s+/g, "_")}`
+                              )
+                            : t("country_not_specified")}
                         </p>
                       </div>
                       <div>
                         <h3 className="text-sm font-medium text-gray-500">
-                          Preferred Language
+                          {t("form_language_label")}
                         </h3>
                         <p className="mt-1 text-lg text-gray-800">
-                          {userData.language || "Not specified"}
+                          {userData.language
+                            ? t(`language_${userData.language.toLowerCase()}`)
+                            : t("language_not_specified")}
                         </p>
                       </div>
                     </div>
@@ -424,18 +451,18 @@ const ProfilePage = () => {
               {/* Account Security */}
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                  Account Security
+                  {t("account_security_title")}
                 </h2>
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-medium text-gray-800">
-                      Change Password
+                      {t("change_password_title")}
                     </h3>
                     <p className="text-gray-600 mb-4">
-                      Update your password to keep your account secure.
+                      {t("change_password_description")}
                     </p>
                     <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                      Change Password
+                      {t("change_password_button")}
                     </button>
                   </div>
                 </div>
@@ -448,14 +475,14 @@ const ProfilePage = () => {
               <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold text-gray-800">
-                    Saved Locations
+                    {t("saved_locations_title")}
                   </h2>
-                  <a
-                    href="/saved-locations"
+                  <Link
+                    href={`${locale}/saved-locations`}
                     className="text-sm text-red-600 hover:text-red-700"
                   >
-                    View All
-                  </a>
+                    {t("saved_locations_view_all")}
+                  </Link>
                 </div>
                 {savedLocations.length > 0 ? (
                   <div className="space-y-4">
@@ -475,10 +502,10 @@ const ProfilePage = () => {
                             href={`/map?location=${location.id}`}
                             className="text-xs text-red-600 hover:underline mr-4"
                           >
-                            View on Map
+                            {t("saved_locations_view_on_map")}
                           </a>
                           <button className="text-xs text-gray-500 hover:text-gray-700">
-                            Remove
+                            {t("saved_locations_remove")}
                           </button>
                         </div>
                       </div>
@@ -486,8 +513,7 @@ const ProfilePage = () => {
                   </div>
                 ) : (
                   <p className="text-gray-600 text-center py-4">
-                    No saved locations yet. Explore the map to save your
-                    favorite places.
+                    {t("saved_locations_empty")}
                   </p>
                 )}
               </div>

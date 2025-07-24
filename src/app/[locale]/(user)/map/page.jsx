@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import MapComponent from "../../../../components/MapComponent";
+import { useTranslations } from "next-intl";
+import { Link } from "next/link";
 
 const MapPage = () => {
   const { data: session, status } = useSession();
@@ -16,6 +18,8 @@ const MapPage = () => {
   const [savedLocations, setSavedLocations] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredServices, setFilteredServices] = useState({});
+  const t = useTranslations("map");
+  const { locale } = useParams();
 
   // Check authentication
   useEffect(() => {
@@ -367,15 +371,15 @@ const MapPage = () => {
 
   // Service categories
   const categories = [
-    { key: "all", label: "All Services", icon: "🔍" },
-    { key: "government", label: "Government", icon: "🏛️" },
-    { key: "banks", label: "Banks", icon: "🏦" },
-    { key: "shopping", label: "Shopping", icon: "🛍️" },
-    { key: "groceries", label: "Groceries", icon: "🛒" },
-    { key: "transport", label: "Transport", icon: "🚌" },
-    { key: "telecom", label: "Telecom", icon: "📱" },
-    { key: "healthcare", label: "Healthcare", icon: "🏥" },
-    { key: "education", label: "Education", icon: "🎓" },
+    { key: "all", label: t("category_all"), icon: "🔍" },
+    { key: "government", label: t("category_government"), icon: "🏛️" },
+    { key: "banks", label: t("category_banks"), icon: "🏦" },
+    { key: "shopping", label: t("category_shopping"), icon: "🛍️" },
+    { key: "groceries", label: t("category_groceries"), icon: "🛒" },
+    { key: "transport", label: t("category_transport"), icon: "🚌" },
+    { key: "telecom", label: t("category_telecom"), icon: "📱" },
+    { key: "healthcare", label: t("category_healthcare"), icon: "🏥" },
+    { key: "education", label: t("category_education"), icon: "🎓" },
   ];
 
   return (
@@ -387,10 +391,8 @@ const MapPage = () => {
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-4 md:mb-0">
-                <h1 className="text-3xl font-bold mb-2">Interactive Map</h1>
-                <p className="text-white/90">
-                  Find essential services and resources across Canada
-                </p>
+                <h1 className="text-3xl font-bold mb-2">{t("hero_title")}</h1>
+                <p className="text-white/90">{t("hero_description")}</p>
               </div>
               <div className="flex space-x-4">
                 <button
@@ -412,7 +414,7 @@ const MapPage = () => {
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
-                      Hide Filters
+                      {t("filter_button_hide")}
                     </>
                   ) : (
                     <>
@@ -429,7 +431,7 @@ const MapPage = () => {
                           d="M4 6h16M4 12h16M4 18h16"
                         />
                       </svg>
-                      Show Filters
+                      {t("filter_button_show")}
                     </>
                   )}
                 </button>
@@ -452,12 +454,12 @@ const MapPage = () => {
               <div className="p-4">
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-800 mb-2">
-                    Search
+                    {t("search_title")}
                   </h2>
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="Search for services..."
+                      placeholder={t("search_placeholder")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
@@ -480,7 +482,7 @@ const MapPage = () => {
 
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-800 mb-2">
-                    Categories
+                    {t("categories_title")}
                   </h2>
                   <div className="space-y-2">
                     {categories.map((category) => (
@@ -507,7 +509,7 @@ const MapPage = () => {
 
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-800 mb-2">
-                    Saved Locations
+                    {t("saved_locations_title")}
                   </h2>
                   {savedLocations.length > 0 ? (
                     <div className="space-y-3">
@@ -528,7 +530,9 @@ const MapPage = () => {
                             <button
                               onClick={() => handleSaveLocation(location)}
                               className="text-red-600 hover:text-red-700"
-                              aria-label="Remove from saved locations"
+                              aria-label={t(
+                                "saved_locations_remove_aria_label"
+                              )}
                             >
                               <svg
                                 className="w-5 h-5"
@@ -548,52 +552,51 @@ const MapPage = () => {
                     </div>
                   ) : (
                     <p className="text-gray-600 text-sm">
-                      No saved locations yet. Click the star icon on any
-                      location to save it.
+                      {t("saved_locations_empty")}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <h2 className="text-lg font-bold text-gray-800 mb-2">
-                    Legend
+                    {t("legend_title")}
                   </h2>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-red-600 rounded-full mr-2"></div>
-                      <span>Government</span>
+                      <span>{t("legend_government")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-green-600 rounded-full mr-2"></div>
-                      <span>Banks</span>
+                      <span>{t("legend_banks")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-purple-600 rounded-full mr-2"></div>
-                      <span>Shopping</span>
+                      <span>{t("legend_shopping")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-yellow-600 rounded-full mr-2"></div>
-                      <span>Groceries</span>
+                      <span>{t("legend_groceries")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-blue-600 rounded-full mr-2"></div>
-                      <span>Transport</span>
+                      <span>{t("legend_transport")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-teal-600 rounded-full mr-2"></div>
-                      <span>Telecom</span>
+                      <span>{t("legend_telecom")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-pink-600 rounded-full mr-2"></div>
-                      <span>Healthcare</span>
+                      <span>{t("legend_healthcare")}</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-indigo-600 rounded-full mr-2"></div>
-                      <span>Education</span>
+                      <span>{t("legend_education")}</span>
                     </div>
                     <div className="flex items-center mt-2 pt-2 border-t border-gray-200">
                       <div className="w-4 h-4 bg-blue-600 rounded-full border-2 border-white mr-2"></div>
-                      <span>Your Location</span>
+                      <span>{t("legend_your_location")}</span>
                     </div>
                   </div>
                 </div>
@@ -625,26 +628,23 @@ const MapPage = () => {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-4 md:mb-0">
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    Can't find what you're looking for?
+                    {t("cta_title")}
                   </h2>
-                  <p className="text-gray-600">
-                    Contact us for personalized assistance in finding the
-                    resources you need.
-                  </p>
+                  <p className="text-gray-600">{t("cta_description")}</p>
                 </div>
                 <div className="flex space-x-4">
-                  <a
-                    href="/contact_us"
+                  <Link
+                    href={`${locale}/contact_us`}
                     className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
                   >
-                    Contact Us
-                  </a>
-                  <a
-                    href="/services"
+                    {t("cta_contact_button")}
+                  </Link>
+                  <Link
+                    href={`${locale}/services`}
                     className="bg-white border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg hover:bg-red-50 transition-colors"
                   >
-                    Browse Services
-                  </a>
+                    {t("cta_services_button")}
+                  </Link>
                 </div>
               </div>
             </div>

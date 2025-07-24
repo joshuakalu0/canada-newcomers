@@ -1,11 +1,19 @@
 "use client";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
+// import { useParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const LanguageSelector = ({ isScrolled }) => {
-  const [currentLang, setCurrentLang] = useState("en");
+  const route = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+  const [currentLang, setCurrentLang] = useState(params.locale);
 
   const changeLanguage = (e) => {
     const newLang = e.target.value;
+
+    route.replace({ pathname, params }, { locale: newLang });
 
     setCurrentLang(newLang);
   };
