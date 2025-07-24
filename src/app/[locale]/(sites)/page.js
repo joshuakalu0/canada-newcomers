@@ -973,7 +973,7 @@ const LandingPage = () => {
                   <div key={index} className="w-full flex-shrink-0 px-4">
                     <div className="bg-gray-50 border-2 border-red-600 rounded-lg p-8 shadow-lg">
                       <p className="text-gray-700 mb-6 italic">
-                        "{testimonial.text}"
+                        {testimonial.text}
                       </p>
                       <div className="flex items-center">
                         <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold text-lg mr-4">
