@@ -1,19 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import '../i18n';
 
 const LanguageSelector = ({ isScrolled }) => {
-  const { i18n } = useTranslation();
-  const [currentLang, setCurrentLang] = useState('en');
-
-  useEffect(() => {
-    setCurrentLang(i18n.language || 'en');
-  }, [i18n.language]);
+  const [currentLang, setCurrentLang] = useState("en");
 
   const changeLanguage = (e) => {
     const newLang = e.target.value;
-    i18n.changeLanguage(newLang);
+
     setCurrentLang(newLang);
   };
 

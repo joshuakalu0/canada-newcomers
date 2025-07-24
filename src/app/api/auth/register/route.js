@@ -24,6 +24,17 @@ export async function POST(request) {
     const { fullName, email, password, language } = result.data;
     const hash = await hashPassword(password);
 
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { message: "User already exists with this email" },
+        { status: 400 }
+      );
+    }
+
     const user = await prisma.user.create({
       data: {
         name: fullName,
@@ -39,12 +50,6 @@ export async function POST(request) {
       },
     });
 
-    // In a real app, you would:
-    // 1. Check if user already exists
-    // 2. Hash the password
-    // 3. Create the user in the database
-
-    // Mock successful response
     return NextResponse.json(
       {
         message: "User registered successfully",

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
-// import LanguageSelector from "./LanguageSelector";
+import LanguageSelector from "./LanguageSelector";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -155,7 +155,7 @@ const Header = () => {
 
             {/* Language Selector */}
             <div className="relative">
-              {/* <LanguageSelector isScrolled={isScrolled} /> */}
+              <LanguageSelector isScrolled={isScrolled} />
             </div>
 
             {/* Auth Buttons or User Menu */}
@@ -266,7 +266,7 @@ const Header = () => {
               </button>
             )}
 
-            {/* <LanguageSelector isScrolled={isScrolled} /> */}
+            <LanguageSelector isScrolled={isScrolled} />
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
